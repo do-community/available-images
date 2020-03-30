@@ -39,10 +39,6 @@ The scss directory contains the main SCSS styling file for the tool, which impor
 This directory contains the Vue templates that are used to render the tool on the client-side.
 `app.vue` is the main Vue file that other templates are referenced into.
 
-#### [`src/available-images/utils`](./src/available-images/utils)
-
-Utility functions that are used by the tool live inside this directory.
-
 ### [`src/build`](./src/build)
 
 The build directory contains a special utility script that is used during the initial build of the tool both for

@@ -28,6 +28,10 @@ limitations under the License.
 
     export default {
         name: 'App',
+        components: {
+            Applications: () => import('./components/applications'),
+            Distributions: () => import('./components/distributions'),
+        },
         data() {
             return {
                 i18n,
@@ -36,10 +40,6 @@ limitations under the License.
         },
         created() {
             this.$data.type = this.$root.$data.type;
-        },
-        components: {
-            Applications: () => import('./components/applications'),
-            Distributions: () => import('./components/distributions'),
         },
     };
 </script>

@@ -5,10 +5,10 @@
                 <label for="input_search" class="hidden">Search distributions</label>
                 <i class="fas fa-search"></i>
                 <input id="input_search"
+                       v-model="filter"
                        class="input"
                        type="text"
                        placeholder="Search distributions..."
-                       v-model="filter"
                 />
             </div>
         </form>
@@ -16,23 +16,25 @@
         <div class="table-container">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Distribution</th>
-                    <th>Version</th>
-                    <th>Image Slug</th>
-                </tr>
+                    <tr>
+                        <th>Distribution</th>
+                        <th>Version</th>
+                        <th>Image Slug</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <template v-if="filtered().length">
-                    <tr v-for="image in filtered()" :key="image.id">
-                        <td>{{ image.distribution }}</td>
-                        <td>{{ image.name }}</td>
-                        <td>{{ image.slug || image.id }}</td>
+                    <template v-if="filtered().length">
+                        <tr v-for="image in filtered()" :key="image.id">
+                            <td>{{ image.distribution }}</td>
+                            <td>{{ image.name }}</td>
+                            <td>{{ image.slug || image.id }}</td>
+                        </tr>
+                    </template>
+                    <tr v-else>
+                        <td colspan="3">
+                            Sorry, no images matched your search.
+                        </td>
                     </tr>
-                </template>
-                <tr v-else>
-                    <td colspan="3">Sorry, no images matched your search.</td>
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -71,11 +73,11 @@
                 if (image.slug.toLowerCase().includes(query)) return true;
                 if (image.id.toString().includes(query)) return true;
 
-                return false
+                return false;
             },
             filtered() {
                 return distributions.filter(this.filterImage);
-            }
+            },
         },
     };
 </script>

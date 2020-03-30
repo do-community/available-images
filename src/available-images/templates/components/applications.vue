@@ -5,10 +5,10 @@
                 <label for="input_search" class="hidden">Search applications</label>
                 <i class="fas fa-search"></i>
                 <input id="input_search"
+                       v-model="filter"
                        class="input"
                        type="text"
                        placeholder="Search applications..."
-                       v-model="filter"
                 />
             </div>
         </form>
@@ -16,21 +16,23 @@
         <div class="table-container">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Application</th>
-                    <th>Image Slug</th>
-                </tr>
+                    <tr>
+                        <th>Application</th>
+                        <th>Image Slug</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <template v-if="filtered().length">
-                    <tr v-for="image in filtered()" :key="image.id">
-                        <td>{{ image.name }}</td>
-                        <td>{{ image.slug || image.id }}</td>
+                    <template v-if="filtered().length">
+                        <tr v-for="image in filtered()" :key="image.id">
+                            <td>{{ image.name }}</td>
+                            <td>{{ image.slug || image.id }}</td>
+                        </tr>
+                    </template>
+                    <tr v-else>
+                        <td colspan="3">
+                            Sorry, no images matched your search.
+                        </td>
                     </tr>
-                </template>
-                <tr v-else>
-                    <td colspan="3">Sorry, no images matched your search.</td>
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -68,11 +70,11 @@
                 if (image.slug.toLowerCase().includes(query)) return true;
                 if (image.id.toString().includes(query)) return true;
 
-                return false
+                return false;
             },
             filtered() {
                 return applications.filter(this.filterImage);
-            }
+            },
         },
     };
 </script>

@@ -14,19 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import "babel-polyfill"
+import 'babel-polyfill';
 
-import Vue from "vue"
-import App from "./templates/app.vue"
-import i18n from "./i18n"
+import Vue from 'vue';
+import App from './templates/app.vue';
+import i18n from './i18n';
 
 document.head.title = i18n.templates.app.title;
 
 document.querySelectorAll('[data-image-list]').forEach(elm => {
     new Vue({
-        render: h => h(App),
         data: {
             type: elm.getAttribute('data-image-list'),
         },
+        render: h => h(App),
     }).$mount(elm);
 });

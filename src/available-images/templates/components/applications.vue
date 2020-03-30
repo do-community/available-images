@@ -1,19 +1,39 @@
 <template>
-    <div class="table-container">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Application</th>
-                <th>Image Slug</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="image in applications">
-                <td>{{ image.name }}</td>
-                <td>{{ image.slug }}</td>
-            </tr>
-            </tbody>
-        </table>
+    <div>
+        <form autocomplete="on" @submit.prevent="">
+            <div class="input-container">
+                <label for="input_search" class="hidden">Search applications</label>
+                <i class="fas fa-search"></i>
+                <input id="input_search"
+                       class="input"
+                       type="text"
+                       placeholder="Search applications..."
+                       v-model="filter"
+                />
+            </div>
+        </form>
+
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Application</th>
+                    <th>Image Slug</th>
+                </tr>
+                </thead>
+                <tbody>
+                <template v-if="filtered().length">
+                    <tr v-for="image in filtered()" :key="image.id">
+                        <td>{{ image.name }}</td>
+                        <td>{{ image.slug || image.id }}</td>
+                    </tr>
+                </template>
+                <tr v-else>
+                    <td colspan="3">Sorry, no images matched your search.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -36,8 +56,23 @@
         data() {
             return {
                 i18n,
-                applications,
+                filter: '',
             };
+        },
+        methods: {
+            filterImage(image) {
+                if (this.$data.filter.trim() === '') return true;
+
+                const query = this.$data.filter.trim().toLowerCase();
+                if (image.name.toLowerCase().includes(query)) return true;
+                if (image.slug.toLowerCase().includes(query)) return true;
+                if (image.id.toString().includes(query)) return true;
+
+                return false
+            },
+            filtered() {
+                return applications.filter(this.filterImage);
+            }
         },
     };
 </script>

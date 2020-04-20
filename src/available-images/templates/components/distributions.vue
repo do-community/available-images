@@ -68,10 +68,10 @@
                 if (this.$data.filter.trim() === '') return true;
 
                 const query = this.$data.filter.trim().toLowerCase();
-                if (image.name.toLowerCase().includes(query)) return true;
-                if (image.distribution.toLowerCase().includes(query)) return true;
-                if (image.slug.toLowerCase().includes(query)) return true;
-                if (image.id.toString().includes(query)) return true;
+                if (image.name && image.name.toLowerCase().includes(query)) return true;
+                if (image.distribution && image.distribution.toLowerCase().includes(query)) return true;
+                if (image.slug && image.slug.toLowerCase().includes(query)) return true;
+                if (image.id && image.id.toString().includes(query)) return true;
 
                 return false;
             },

@@ -10,7 +10,7 @@
     "build:applications": "IMAGE_TYPE=application node ./src/build/get.js",
     "build:distributions": "IMAGE_TYPE=distribution node ./src/build/get.js",
     "build:static": "copyfiles --up 2 ./src/static/{*,**/*} dist",
-    "build:tool": "do-vue tool src/available-images dist",
+    "build:tool": "do-vue tool src/available-images dist --scope-hoisting",
     "deploy:spaces:comment": "do-vue comment available-images",
     "dev": "npm run dev:prep && npm run dev:parcel",
     "dev:parcel": "parcel ./src/available-images/index.html --out-dir ./dev --port 8000",

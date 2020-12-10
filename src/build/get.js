@@ -26,7 +26,6 @@ const main = async () => {
     while (nextPage) {
         const data = await get(nextPage);
         results.push(...data.images);
-        console.log(data.links);
         nextPage = data.links && data.links.pages && data.links.pages.next;
     }
     await save(results.filter(imageFilter));

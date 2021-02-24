@@ -36,7 +36,7 @@
   "dependencies": {
     "babel-eslint": "^10.1.0",
     "do-bulma": "git+https://github.com/do-community/do-bulma.git",
-    "do-vue": "git+https://github.com/do-community/do-vue.git#f13494d7a58ba8f00d121e15bc4fcbbc36234701",
+    "do-vue": "git+https://github.com/do-community/do-vue.git#869ac289fb02195a90ee70402ed97bd3a008905b",
     "node-fetch": "^2.6.1",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.3"

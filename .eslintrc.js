@@ -9,8 +9,8 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 2019,
-    sourceType: 'module',
-    parser: "babel-eslint"
+    parser: '@babel/eslint-parser',
+    requireConfigFile: false,
   },
   rules: {
     'linebreak-style': ['error', 'unix'],
@@ -28,5 +28,6 @@ module.exports = {
     }],
     'vue/no-unused-vars': 0,
     'vue/html-self-closing': 0,
+    'vue/multi-word-component-names': 0,
   },
 };

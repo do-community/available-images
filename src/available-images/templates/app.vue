@@ -1,5 +1,5 @@
 <!--
-Copyright 2020 DigitalOcean
+Copyright 2022 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,22 +24,28 @@ limitations under the License.
 </template>
 
 <script>
+    import { defineAsyncComponent } from 'vue';
     import i18n from '../i18n';
+
+    const Applications = defineAsyncComponent(() => import('./components/applications'));
+    const Distributions = defineAsyncComponent(() => import('./components/distributions'));
 
     export default {
         name: 'App',
         components: {
-            Applications: () => import('./components/applications'),
-            Distributions: () => import('./components/distributions'),
+            Applications,
+            Distributions,
+        },
+        props: {
+            type: {
+                type: String,
+                required: true,
+            },
         },
         data() {
             return {
                 i18n,
-                type: null,
             };
-        },
-        created() {
-            this.$data.type = this.$root.$data.type;
         },
     };
 </script>

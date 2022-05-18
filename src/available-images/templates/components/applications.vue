@@ -16,7 +16,7 @@ limitations under the License.
 
 <template>
     <div>
-        <form autocomplete="on" @submit.prevent="">
+        <form v-if="!noSearch" autocomplete="on" @submit.prevent="">
             <div class="input-container">
                 <label for="input_search" class="hidden">Search applications</label>
                 <i class="fas fa-search"></i>
@@ -39,8 +39,8 @@ limitations under the License.
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-if="filtered().length">
-                        <tr v-for="image in filtered()" :key="image.id">
+                    <template v-if="filtered.length">
+                        <tr v-for="image in filtered" :key="image.id">
                             <td>{{ image.name }}</td>
                             <td>{{ image.slug || image.id }}</td>
                         </tr>
@@ -72,11 +72,22 @@ limitations under the License.
 
     export default {
         name: 'Applications',
+        props: {
+            noSearch: {
+                type: Boolean,
+                default: false,
+            },
+        },
         data() {
             return {
                 i18n,
                 filter: '',
             };
+        },
+        computed: {
+            filtered() {
+                return applications.filter(this.filterImage);
+            },
         },
         methods: {
             filterImage(image) {
@@ -85,12 +96,9 @@ limitations under the License.
                 const query = this.$data.filter.trim().toLowerCase();
                 if (image.name && image.name.toLowerCase().includes(query)) return true;
                 if (image.slug && image.slug.toLowerCase().includes(query)) return true;
-                if (image.id && image.id.toString().includes(query)) return true;
+                if (!image.slug && image.id && image.id.toString().includes(query)) return true;
 
                 return false;
-            },
-            filtered() {
-                return applications.filter(this.filterImage);
             },
         },
     };

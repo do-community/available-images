@@ -16,7 +16,7 @@ limitations under the License.
 
 <template>
     <div>
-        <form autocomplete="on" @submit.prevent="">
+        <form v-if="!noSearch" autocomplete="on" @submit.prevent="">
             <div class="input-container">
                 <label for="input_search" class="hidden">Search distributions</label>
                 <i class="fas fa-search"></i>
@@ -117,6 +117,10 @@ limitations under the License.
             PrettyCheck,
         },
         props: {
+            noSearch: {
+                type: Boolean,
+                default: false,
+            },
             grouped: {
                 type: Boolean,
                 default: false,

@@ -17,8 +17,8 @@ limitations under the License.
 <template>
     <div class="all do-bulma">
         <div class="table-container">
-            <Applications v-if="type === 'applications'"></Applications>
-            <Distributions v-if="type === 'distributions'" :grouped="grouped"></Distributions>
+            <Applications v-if="type === 'applications'" :no-search="noSearch"></Applications>
+            <Distributions v-if="type === 'distributions'" :no-search="noSearch" :grouped="grouped"></Distributions>
         </div>
     </div>
 </template>
@@ -40,6 +40,10 @@ limitations under the License.
             type: {
                 type: String,
                 required: true,
+            },
+            noSearch: {
+                type: Boolean,
+                default: false,
             },
             grouped: {
                 type: Boolean,

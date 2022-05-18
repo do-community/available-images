@@ -31,7 +31,36 @@ limitations under the License.
         </form>
 
         <div class="table-container">
-            <table class="table">
+            <table v-if="grouped" class="table">
+                <thead>
+                    <tr>
+                        <th v-for="distro in distributionGroups" :key="distro">
+                            {{ distro }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template v-if="filtered.length">
+                        <tr>
+                            <td v-for="distro in distributionGroups" :key="distro">
+                                <ul>
+                                    <li v-for="image in filteredGroups[distro] || []" :key="image.id">
+                                        {{ image.name }}
+                                        <code class="slim">{{ image.slug || image.id }}</code>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </template>
+                    <tr v-else>
+                        <td :colspan="distributionGroups.length">
+                            Sorry, no images matched your search.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table v-else class="table">
                 <thead>
                     <tr>
                         <th>Distribution</th>
@@ -40,8 +69,8 @@ limitations under the License.
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-if="filtered().length">
-                        <tr v-for="image in filtered()" :key="image.id">
+                    <template v-if="filtered.length">
+                        <tr v-for="image in filtered" :key="image.id">
                             <td>{{ image.distribution }}</td>
                             <td>{{ image.name }}</td>
                             <td>{{ image.slug || image.id }}</td>
@@ -72,13 +101,36 @@ limitations under the License.
         return a.distribution > b.distribution;
     });
 
+    const distributionGroups = [...new Set(distributions.map(d => d.distribution))];
+
     export default {
         name: 'Distributions',
+        props: {
+            grouped: {
+                type: Boolean,
+                default: false,
+            },
+        },
         data() {
             return {
                 i18n,
                 filter: '',
+                distributionGroups,
             };
+        },
+        computed: {
+            filtered() {
+                return distributions.filter(this.filterImage);
+            },
+            filteredGroups() {
+                return this.filtered.reduce((obj, image) => ({
+                    ...obj,
+                    [image.distribution]: [
+                        ...(obj[image.distribution] || []),
+                        image,
+                    ],
+                }), {});
+            },
         },
         methods: {
             filterImage(image) {
@@ -86,14 +138,11 @@ limitations under the License.
 
                 const query = this.$data.filter.trim().toLowerCase();
                 if (image.name && image.name.toLowerCase().includes(query)) return true;
-                if (image.distribution && image.distribution.toLowerCase().includes(query)) return true;
                 if (image.slug && image.slug.toLowerCase().includes(query)) return true;
-                if (image.id && image.id.toString().includes(query)) return true;
+                if (!image.slug && image.id && image.id.toString().includes(query)) return true;
+                if (!this.grouped && image.distribution && image.distribution.toLowerCase().includes(query)) return true;
 
                 return false;
-            },
-            filtered() {
-                return distributions.filter(this.filterImage);
             },
         },
     };

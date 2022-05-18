@@ -18,7 +18,7 @@ limitations under the License.
     <div class="all do-bulma">
         <div class="table-container">
             <Applications v-if="type === 'applications'"></Applications>
-            <Distributions v-if="type === 'distributions'"></Distributions>
+            <Distributions v-if="type === 'distributions'" :grouped="grouped"></Distributions>
         </div>
     </div>
 </template>
@@ -40,6 +40,10 @@ limitations under the License.
             type: {
                 type: String,
                 required: true,
+            },
+            grouped: {
+                type: Boolean,
+                default: false,
             },
         },
         data() {

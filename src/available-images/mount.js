@@ -23,5 +23,5 @@ import i18n from './i18n';
 document.head.title = i18n.templates.app.title;
 
 document.querySelectorAll('[data-image-list]').forEach(elm => {
-    createApp(App, { type: elm.getAttribute('data-image-list') }).mount(elm);
+    createApp(App, { type: elm.getAttribute('data-image-list'), grouped: elm.hasAttribute('data-grouped') }).mount(elm);
 });

@@ -46,7 +46,7 @@ limitations under the License.
                                 <ul>
                                     <li v-for="image in filteredGroups[distro] || []" :key="image.id">
                                         {{ image.name }}
-                                        <code class="slim">{{ image.slug || image.id }}</code>
+                                        <code v-if="showSlugs" class="slim">{{ image.slug || image.id }}</code>
                                     </li>
                                 </ul>
                             </td>
@@ -84,12 +84,20 @@ limitations under the License.
                 </tbody>
             </table>
         </div>
+
+        <PrettyCheck v-if="grouped" v-model="showSlugs" tabindex="0" class="p-default p-curve p-fill p-icon" @keydown.enter="toggleShowSlugs" @keydown.space="toggleShowSlugs">
+            <template #extra>
+                <i class="icon fas fa-check"></i>
+            </template>
+            Show image API slugs
+        </PrettyCheck>
     </div>
 </template>
 
 <script>
     import i18n from '../../i18n';
     import data from '../../../build/distributions';
+    import PrettyCheck from 'do-vue/src/templates/pretty-checkbox-vue/pretty_check';
 
     const distributions = data.sort((a, b) => {
         if (a.distribution === b.distribution) {
@@ -105,6 +113,9 @@ limitations under the License.
 
     export default {
         name: 'Distributions',
+        components: {
+            PrettyCheck,
+        },
         props: {
             grouped: {
                 type: Boolean,
@@ -116,6 +127,7 @@ limitations under the License.
                 i18n,
                 filter: '',
                 distributionGroups,
+                showSlugs: false,
             };
         },
         computed: {
@@ -143,6 +155,10 @@ limitations under the License.
                 if (!this.grouped && image.distribution && image.distribution.toLowerCase().includes(query)) return true;
 
                 return false;
+            },
+            toggleShowSlugs(evt) {
+                evt.preventDefault();
+                this.showSlugs = !this.showSlugs;
             },
         },
     };

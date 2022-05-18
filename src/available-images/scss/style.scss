@@ -17,3 +17,46 @@ limitations under the License.
 $header: #0071fe;
 
 @import "~do-bulma/src/style";
+
+.do-bulma {
+  $pretty--color-default: $primary; // stylelint-disable-line scss/dollar-variable-pattern
+  $pretty--color-dark: $primary; // stylelint-disable-line scss/dollar-variable-pattern
+
+  @import "~pretty-checkbox/src/pretty-checkbox";
+
+  .table-container {
+    margin: 0 !important;
+  }
+
+  .pretty {
+    &.p-icon {
+      font-size: 18px;
+      margin: $margin / 2;
+
+      .state {
+        .icon {
+          top: -1px;
+
+          &::before {
+            color: $panel;
+            font-size: 14px;
+          }
+        }
+
+        label {
+          color: $dark-grey;
+          font-size: 14px;
+          line-height: 20px;
+          vertical-align: middle;
+          padding-left: $margin / 2;
+
+          &::before,
+          &::after {
+            font-size: 18px;
+            top: -1px;
+          }
+        }
+      }
+    }
+  }
+}

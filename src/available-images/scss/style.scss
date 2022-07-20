@@ -31,7 +31,7 @@ $header: #0071fe;
   .pretty {
     &.p-icon {
       font-size: 18px;
-      margin: $margin / 2;
+      margin: $margin * .5;
 
       .state {
         .icon {
@@ -48,7 +48,7 @@ $header: #0071fe;
           font-size: 14px;
           line-height: 20px;
           vertical-align: middle;
-          padding-left: $margin / 2;
+          padding-left: $margin * .5;
 
           &::before,
           &::after {

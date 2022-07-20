@@ -38,20 +38,20 @@
     "do-vue": "github:do-community/do-vue",
     "node-fetch": "^2.6.7",
     "pretty-checkbox-vue": "^1.1.9",
-    "vue": "^3.2.31"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.17.0",
+    "@babel/eslint-parser": "^7.18.9",
     "copyfiles": "^2.4.1",
-    "eslint": "^8.10.0",
-    "eslint-plugin-vue": "^8.5.0",
+    "eslint": "^8.20.0",
+    "eslint-plugin-vue": "^8.7.1",
     "posthtml": "^0.16.6",
-    "posthtml-extend": "^0.6.2",
-    "sass": "^1.49.9",
-    "stylelint": "^14.5.3",
+    "posthtml-extend": "^0.6.3",
+    "sass": "^1.53.0",
+    "stylelint": "^14.9.1",
     "stylelint-config-standard-scss": "^3.0.0",
     "stylelint-order": "^5.0.0",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.7.7"
   },
   "overrides": {
     "do-vue": {

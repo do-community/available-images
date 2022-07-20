@@ -34,8 +34,8 @@
   },
   "homepage": "https://github.com/do-community/available-images#readme",
   "dependencies": {
-    "do-bulma": "git+https://github.com/do-community/do-bulma.git",
-    "do-vue": "git+https://github.com/do-community/do-vue.git",
+    "do-bulma": "github:do-community/do-bulma",
+    "do-vue": "github:do-community/do-vue",
     "node-fetch": "^2.6.7",
     "pretty-checkbox-vue": "^1.1.9",
     "vue": "^3.2.31"

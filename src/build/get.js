@@ -30,11 +30,12 @@ const get = async url => {
     const res = await fetch.then(({ default: run }) => run(url, {
         headers: { Authorization: `Bearer ${token}` },
     }));
+    if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
     return await res.json();
 };
 
 const save = async data => {
-    await fs.promises.writeFile(path.join(__dirname, `${process.env.IMAGE_TYPE}s.json`), JSON.stringify(data));
+    await fs.promises.writeFile(path.join(__dirname, `${process.env.IMAGE_TYPE}s.json`), JSON.stringify(data, null, 2));
 };
 
 const main = async () => {
@@ -43,9 +44,12 @@ const main = async () => {
     while (nextPage) {
         const data = await get(nextPage);
         results.push(...data.images);
-        nextPage = data.links && data.links.pages && data.links.pages.next;
+        nextPage = data.links?.pages?.next;
     }
     await save(results.filter(imageFilter));
 };
 
-main();
+main().catch(err => {
+    console.error(err);
+    process.exit(1);
+});

@@ -39,6 +39,11 @@ const save = async data => {
 };
 
 const main = async () => {
+    if (process.env.STUB_IMAGE_DATA === 'true') {
+        await save([]);
+        return;
+    }
+
     const results = [];
     let nextPage = `https://api.digitalocean.com/v2/images?page=1&type=${process.env.IMAGE_TYPE}`;
     while (nextPage) {

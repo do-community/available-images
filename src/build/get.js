@@ -45,7 +45,7 @@ const main = async () => {
     }
 
     const results = [];
-    let nextPage = `https://api.digitalocean.com/v2/images?page=1&type=${process.env.IMAGE_TYPE}`;
+    let nextPage = `https://api.digitalocean.com/v2/images?page=1&per_page=200&type=${process.env.IMAGE_TYPE}`;
     while (nextPage) {
         const data = await get(nextPage);
         results.push(...data.images);

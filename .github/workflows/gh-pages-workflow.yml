@@ -37,6 +37,9 @@ jobs:
       env:
         DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
 
+    - name: Clean build output
+      run: rm dist/report.html
+
     - name: Deploy master to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:

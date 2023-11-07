@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A simple list of all images available on DigitalOcean.",
   "license": "Apache-2.0",
+  "private": true,
+  "engines": {
+    "node": "20.9.0"
+  },
   "scripts": {
     "build": "npm run build:clean && npm run build:template && npm run build:applications && npm run build:distributions && npm run build:static && npm run build:tool",
     "build:clean": "do-vue clean",

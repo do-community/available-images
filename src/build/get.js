@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@ const fs = require('fs');
 const path = require('path');
 const imageFilter = require('./imageFilter');
 
-const fetch = import('node-fetch');
-
 let token = process.env.DIGITALOCEAN_TOKEN;
 if (fs.existsSync(path.join(__dirname, '..', '..', 'config.js'))) {
     const config = require('../../config');
@@ -27,9 +25,9 @@ if (fs.existsSync(path.join(__dirname, '..', '..', 'config.js'))) {
 }
 
 const get = async url => {
-    const res = await fetch.then(({ default: run }) => run(url, {
+    const res = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
-    }));
+    });
     if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
     return await res.json();
 };

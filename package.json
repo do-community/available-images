@@ -40,7 +40,6 @@
   "dependencies": {
     "do-bulma": "github:do-community/do-bulma",
     "do-vue": "github:do-community/do-vue",
-    "node-fetch": "^3.3.2",
     "pretty-checkbox-vue": "^1.1.9",
     "vue": "^3.4.15"
   },

@@ -14,6 +14,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module.exports = image => image.public
-    && image.regions.length > 0
+module.exports = image => image.regions.length > 0
     && ['new', 'available'].includes(image.status.toLowerCase());
